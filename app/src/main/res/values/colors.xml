@@ -2,4 +2,13 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="Background">#000000</color>
+    <color name="ToolBar">#212121</color>
+    <color name="Primary">#303030</color>
+    <color name="Secondary">#424242</color>
+
+    <color name="primaryText">#FFFFFFFF</color>
+    <color name="secondaryText">#B3FFFFFF</color>
+    <color name="disabledText">#88FFFFFF</color>
 </resources>
