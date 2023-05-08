@@ -1,11 +1,12 @@
 package com.example.foodit.classes;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class Recipe {
-    private String id;
+    private final String id;
 
     private String name;
     private String description;
@@ -23,9 +24,21 @@ public class Recipe {
 
         groups = new ArrayList<>();
         groups.add("");
+        ingredientsByGroup = new HashMap<>();
         ingredientsByGroup.put("", new ArrayList<>());
 
         steps = new ArrayList<>();
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public String getTitle() {
+        return name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
 }

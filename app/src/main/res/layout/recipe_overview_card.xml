@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:layout_marginHorizontal="4dp"
+    android:layout_marginTop="4dp"
+    android:background="@color/Primary">
+
+    <ImageView
+        android:id="@+id/rOverviewCardImage"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentEnd="true"
+        android:src="@drawable/ic_launcher_foreground"/>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingVertical="4dp"
+        android:paddingStart="8dp"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/rOverviewCardTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/primaryText"
+            android:text="title"/>
+        <TextView
+            android:id="@+id/rOverviewCardDesc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/secondaryText"
+            android:text="description"/>
+    </LinearLayout>
+    <ImageView
+        android:id="@+id/rOverviewCardArrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/arrow_right"
+        android:layout_alignParentEnd="true"/>
+</RelativeLayout>
