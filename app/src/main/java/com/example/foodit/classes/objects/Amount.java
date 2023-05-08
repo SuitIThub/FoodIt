@@ -1,10 +1,25 @@
-package com.example.foodit.classes;
+package com.example.foodit.classes.objects;
 
 import android.util.Pair;
 
+import com.example.foodit.classes.Unit;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class Amount {
+    public static class Save {
+        public final String baseUnit;
+        public final double amount;
+
+        public Save(Amount amount) {
+            baseUnit = amount.baseUnit;
+            this.amount = amount.amount;
+        }
+    }
+
     private String baseUnit;
-    private float amount;
+    private double amount;
 
     public Amount(String unit, float amount) {
         baseUnit = Unit.getBase(unit);
@@ -16,13 +31,18 @@ public class Amount {
         this.amount = Unit.calculateBaseValue(unit, amount / portion);
     }
 
-    public Pair<String, Float> getBestUnit() {
-        float amount = this.amount;
+    public Amount(Save save) {
+        baseUnit = save.baseUnit;
+        amount = save.amount;
+    }
+
+    public Pair<String, Double> getBestUnit() {
+        double amount = this.amount;
         Unit unit = Unit.getUnit(baseUnit);
         for (Unit u : Unit.getUnitsByBase(baseUnit)) {
             if (!u.isDisplayable)
                 continue;
-            float calc = this.amount / u.value;
+            double calc = this.amount / u.value;
             if (calc < amount && calc >= 1f) {
                 amount = calc;
                 unit = u;
@@ -32,9 +52,9 @@ public class Amount {
         return new Pair<>(unit.label, amount);
     }
 
-    public float getAmount(String label) {
+    public double getAmount(String label) {
         if (Unit.getUnit(label).base != baseUnit)
-            return Float.NaN;
+            return Double.NaN;
         return amount / Unit.getValue(label);
     }
 
@@ -46,7 +66,7 @@ public class Amount {
     {
         if (unit.length > 0) {
             if (unit[0].equals("best")) {
-                Pair<String, Float> bestUnit = getBestUnit();
+                Pair<String, Double> bestUnit = getBestUnit();
                 return bestUnit.first + " " + bestUnit.second;
             }
 

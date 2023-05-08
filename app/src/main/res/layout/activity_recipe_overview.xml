@@ -86,4 +86,13 @@
         android:scrollbars="vertical"
         />
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:src="@mipmap/add_dark"
+        android:onClick="addRecipe"
+        android:layout_margin="20dp"/>
+
 </RelativeLayout>

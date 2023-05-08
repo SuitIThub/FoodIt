@@ -1,5 +1,6 @@
 package com.example.foodit.viewmanager;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,12 +9,14 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.foodit.R;
-import com.example.foodit.classes.Recipe;
-
-import java.util.List;
+import com.example.foodit.classes.objects.Recipe;
 
 public class RecipeOverviewAdapter extends RecyclerView.Adapter<RecipeOverviewAdapter.ViewHolder> {
-    private List<Recipe> recipes;
+    private Recipe[] recipes;
+
+    private Context context;
+
+    private int lastPosition = -1;
 
     /**
      * Provide a reference to the type of views that you are using
@@ -46,8 +49,9 @@ public class RecipeOverviewAdapter extends RecyclerView.Adapter<RecipeOverviewAd
      * @param recipes List<Recipe> containing the data to populate views to be used
      * by RecyclerView
      */
-    public RecipeOverviewAdapter(List<Recipe> recipes) {
+    public RecipeOverviewAdapter(Recipe[] recipes, Context context) {
         this.recipes = recipes;
+        this.context = context;
     }
 
     // Create new views (invoked by the layout manager)
@@ -65,13 +69,14 @@ public class RecipeOverviewAdapter extends RecyclerView.Adapter<RecipeOverviewAd
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
-        viewHolder.getTitleView().setText(recipes.get(position).getTitle());
-        viewHolder.getDescView().setText(recipes.get(position).getDescription());
+        viewHolder.getTitleView().setText(recipes[position].getTitle());
+        viewHolder.getDescView().setText(recipes[position].getDescription());
     }
 
     // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
-        return recipes.size();
+        return recipes.length;
     }
+
 }

@@ -23,4 +23,8 @@ public class Helper {
 
         return date + String.format("%04d", count);
     }
+
+    public static String getNow() {
+        return df.format(Calendar.getInstance().getTime());
+    }
 }
