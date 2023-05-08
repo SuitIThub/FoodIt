@@ -1,14 +1,10 @@
 package com.example.foodit.classes.objects;
 
-import android.util.Log;
-
 import com.example.foodit.classes.Helper;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 public class Recipe {
@@ -32,7 +28,7 @@ public class Recipe {
                 groups.add(new IngredientGroup.Save(recipe.groups.get(i)));
             }
 
-            steps = new ArrayList<PrepStep.Save>();
+            steps = new ArrayList<>();
             for (int i = 0; i < recipe.steps.size(); i++) {
                 steps.add(new PrepStep.Save(recipe.steps.get(i)));
             }
@@ -46,7 +42,7 @@ public class Recipe {
     private String description;
 
     private IngredientGroup defaultGroup;
-    private ArrayList<IngredientGroup> groups;
+    private HashMap<String, IngredientGroup> groups;
     private ArrayList<PrepStep> steps;
 
     public Recipe (String title) {
@@ -56,7 +52,7 @@ public class Recipe {
         description = "";
 
         defaultGroup = new IngredientGroup("~DEFAULT~");
-        groups = new ArrayList<>();
+        groups = new HashMap<>();
 
         steps = new ArrayList<>();
     }
@@ -67,9 +63,10 @@ public class Recipe {
         description = save.description;
         defaultGroup = new IngredientGroup(save.defaultGroup);
 
-        groups = new ArrayList<>();
+        groups = new HashMap<>();
         for (IngredientGroup.Save gs : save.groups) {
-            groups.add(new IngredientGroup(gs));
+            IngredientGroup i = new IngredientGroup(gs);
+            groups.put(i.getId(), i);
         }
 
         steps = new ArrayList<>();
@@ -96,5 +93,62 @@ public class Recipe {
 
     public void setDescription(String desc) {
         description = desc;
+    }
+
+    public void addGroup(IngredientGroup group) {
+        groups.put(group.getId(), group);
+    }
+
+    public boolean containsGroup(String id) {
+        if (defaultGroup.getId().equals(id))
+            return true;
+        else if (groups.containsKey(id))
+            return true;
+        return false;
+    }
+
+    public IngredientGroup getGroup(String id) {
+        if (defaultGroup.getId().equals(id) || id.equals("Default"))
+            return defaultGroup;
+        else if (groups.containsKey(id))
+            return groups.get(id);
+        return null;
+    }
+
+    public IngredientGroup[] getGroups() {
+        return groups.values().toArray(new IngredientGroup[0]);
+    }
+
+    public Ingredient getIngredient(String groupId, String id) {
+        if (defaultGroup.getId().equals(groupId) && defaultGroup.containsIngredient(id))
+            return defaultGroup.getIngredient(id);
+        else if (groups.containsKey(groupId) && groups.get(id).containsIngredient(id)) {
+            return groups.get(groupId).getIngredient(id);
+        }
+        return null;
+    }
+
+    public Ingredient getIngredient(String id) {
+        if (defaultGroup.containsIngredient(id))
+            return defaultGroup.getIngredient(id);
+
+        for (IngredientGroup group : groups.values()) {
+            if (group.containsIngredient(id))
+                return group.getIngredient(id);
+        }
+
+        return null;
+    }
+
+    public boolean containsIngredient(String id) {
+        if (defaultGroup.containsIngredient(id))
+            return true;
+
+        for (IngredientGroup group : groups.values()) {
+            if (group.containsIngredient(id))
+                return true;
+        }
+
+        return false;
     }
 }

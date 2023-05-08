@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/Background"
     android:theme="@style/Theme.AppCompat.NoActionBar"
-    tools:context=".MainActivity">
+    tools:context=".classes.activities.MainActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"

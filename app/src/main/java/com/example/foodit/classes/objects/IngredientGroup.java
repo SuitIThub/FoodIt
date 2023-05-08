@@ -6,6 +6,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -29,7 +30,7 @@ public class IngredientGroup {
         }
     }
 
-    private String id;
+    private final String id;
 
     private String name;
 
@@ -50,5 +51,48 @@ public class IngredientGroup {
             Ingredient ingredient = new Ingredient(is);
             ingredients.put(ingredient.getId(), ingredient);
         }
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Ingredient[] getIngredients() {
+        return ingredients.values().toArray(new Ingredient[0]);
+    }
+
+    public Ingredient getIngredient(String id) {
+        if (!ingredients.containsKey(id))
+            return null;
+        return ingredients.get(id);
+    }
+
+    public boolean containsIngredient(String id) {
+        return ingredients.containsKey(id);
+    }
+
+    public void addIngredient(Ingredient ingredient) {
+        if (!ingredients.containsKey(ingredient.getId()))
+            ingredients.put(ingredient.getId(), ingredient);
+    }
+
+    public void removeIngredient(String id) {
+        ingredients.remove(id);
+    }
+
+    public void removeIngredient(Ingredient ingredient) {
+        ingredients.remove(ingredient.getId());
+    }
+
+    public int getIngredientAmount() {
+        return ingredients.size();
     }
 }

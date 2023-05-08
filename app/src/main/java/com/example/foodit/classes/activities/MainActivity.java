@@ -1,4 +1,4 @@
-package com.example.foodit;
+package com.example.foodit.classes.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.example.foodit.R;
 import com.example.foodit.classes.Data;
 
 public class MainActivity extends AppCompatActivity {
@@ -18,6 +19,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void openRecipeOverview(View view) {
-        startActivity(new Intent(MainActivity.this, RecipeOverview.class));
+        startActivity(new Intent(MainActivity.this, RecipeActivity.class));
     }
 }

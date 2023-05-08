@@ -1,4 +1,4 @@
-package com.example.foodit;
+package com.example.foodit.classes.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -7,12 +7,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 import android.view.View;
 
+import com.example.foodit.R;
 import com.example.foodit.classes.Data;
 import com.example.foodit.classes.Helper;
 import com.example.foodit.classes.objects.Recipe;
 import com.example.foodit.viewmanager.RecipeOverviewAdapter;
 
-public class RecipeOverview extends AppCompatActivity {
+public class RecipeOverviewActivity extends AppCompatActivity {
 
     RecyclerView rvRecipeList;
 
